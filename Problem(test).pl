@@ -10,6 +10,7 @@ allocated(p4, [r2]).
 requested(p1, [r1]).
 requested(p3, [r2]).
 
+
 safePath([],[]):-!.
 
 safePath([H|T],S):-
@@ -94,10 +95,11 @@ completeSafePath([],[],A):-!.
 completeSafePath([H|T],[H|T1],A):-
 reqForP([H],R),
 checkInAvail(R,A),
-getAllAvailRes(R,A),
-completeSafePath(T,T1,A),!.
+getAllAvailRes(R,S),
+completeSafePath(T,T1,S),!.
 
 completed(F):-
+getAllAvailRes(A),
 getArr(S,R,P),
 completeSafePath(R,New,A),
 append(S,New,F).
